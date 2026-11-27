@@ -3,7 +3,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { langs, projects, contacts, stack } from './src/content.js';
 
-const SITE = (process.env.SITE_URL || 'https://ibrohimkomilov.pages.dev').replace(/\/$/, '');
+const SITE = (process.env.SITE_URL || 'https://portfolio.ibrohimkomilov001.workers.dev').replace(/\/$/, '');
 const YEAR = new Date().getFullYear();
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

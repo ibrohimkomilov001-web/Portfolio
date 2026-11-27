@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Sitemap: https://ibrohimkomilov.pages.dev/sitemap.xml
+Sitemap: https://portfolio.ibrohimkomilov001.workers.dev/sitemap.xml
