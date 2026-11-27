@@ -29,7 +29,7 @@ export async function onRequestPost({ request, env }) {
   const lines = [
     '<b>🆕 Yangi ariza</b>',
     `👤 ${esc(name)}`,
-    `📞 <a href="tel:+${phone}">${pretty}</a>`,
+    `📞 ${pretty}`,
     clip(d.service, 60) ? `🧩 ${esc(clip(d.service, 60))}` : null,
     clip(d.message, 1000) ? `💬 ${esc(clip(d.message, 1000))}` : null,
     '',
@@ -38,11 +38,16 @@ export async function onRequestPost({ request, env }) {
     utm ? `📣 ${esc(utm)}` : null,
   ].filter((x) => x !== null);
 
-  const res = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: lines.join('\n'), parse_mode: 'HTML', disable_web_page_preview: true }),
-  });
+  let res;
+  try {
+    res = await fetch(`https://api.telegram.org/bot${env.TG_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ chat_id: env.TG_CHAT_ID, text: lines.join('\n'), parse_mode: 'HTML', disable_web_page_preview: true }),
+    });
+  } catch {
+    return json({ ok: false, error: 'telegram_unreachable' }, 502);
+  }
   if (!res.ok) return json({ ok: false, error: 'telegram' }, 502);
   return json({ ok: true });
 }
