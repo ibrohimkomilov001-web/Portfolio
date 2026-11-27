@@ -1,0 +1,9 @@
+{
+  "name": "ibrohimkomilov-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && npx wrangler pages dev public"
+  }
+}
