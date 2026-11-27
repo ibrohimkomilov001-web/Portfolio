@@ -9,5 +9,7 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
   },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Dashboard'da qo'shilgan TG_BOT_TOKEN / TG_CHAT_ID deploy paytida o'chib ketmasin
+  "keep_vars": true
 }
