@@ -11,7 +11,10 @@ public/css/site.css   dizayn tizimi va barcha stillar
 public/js/site.js     animatsiyalar, menyu, forma
 public/vendor/        GSAP 3.13 (ScrollTrigger, SplitText, ScrambleText), Lenis
 public/img/           rasmlar (WebP, 2 o'lchamda)
-functions/api/leads.js  Cloudflare Pages Function: formani Telegram'ga yuboradi
+lib/lead.js           ariza mantig'i (Telegram'ga yuborish)
+api/leads.js          Vercel Function → lib/lead.js
+functions/api/leads.js  Cloudflare Pages Function → lib/lead.js
+vercel.json           Vercel sozlamalari
 docs/                 pulatdzyn.com tahlili va skrinshotlar
 ```
 
@@ -24,6 +27,19 @@ node build.mjs
 cd public && python3 -m http.server 8000   # forma ishlamaydi, faqat ko'rinish
 # forma bilan: npx wrangler pages dev public
 ```
+
+## Vercel'ga chiqarish
+
+1. https://vercel.com/new → **Import Git Repository** → `Portfolio` repo.
+2. Framework Preset: **Other**. Build va output sozlamalari `vercel.json` dan olinadi (`node build.mjs` → `public`), o'zgartirmang.
+3. **Environment Variables** ga qo'shing:
+   - `TG_BOT_TOKEN` — bot tokeni
+   - `TG_CHAT_ID` — arizalar keladigan chat ID
+   - `SITE_URL` — sayt manzili, masalan `https://ibrohimkomilov.vercel.app` (domen ulangach — domen)
+4. **Deploy**. Arizalar `api/leads.js` (Vercel Function) orqali Telegram'ga boradi.
+5. Analitika: loyiha → **Analytics** → **Enable**.
+
+Domen: loyiha → **Settings → Domains**. Keyin `SITE_URL` ni yangilab, qayta deploy qiling.
 
 ## Cloudflare Pages'ga chiqarish
 
