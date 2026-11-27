@@ -15,6 +15,7 @@ lib/lead.js           ariza mantig'i (Telegram'ga yuborish)
 api/leads.js          Vercel Function → lib/lead.js
 functions/api/leads.js  Cloudflare Pages Function → lib/lead.js
 vercel.json           Vercel sozlamalari
+worker.js, wrangler.jsonc  Cloudflare Workers: statik sayt + /api/leads
 docs/                 pulatdzyn.com tahlili va skrinshotlar
 ```
 
@@ -27,6 +28,14 @@ node build.mjs
 cd public && python3 -m http.server 8000   # forma ishlamaydi, faqat ko'rinish
 # forma bilan: npx wrangler pages dev public
 ```
+
+## Cloudflare Workers'ga chiqarish (asosiy yo'l)
+
+1. dash.cloudflare.com → **Compute → Workers & Pages** → **Create** → **Import a repository** → `Portfolio`.
+2. Sozlamalar: Project name `portfolio`, Build command `npm run build`, Deploy command `npx wrangler deploy`. **Deploy**.
+3. Worker → **Settings → Variables and Secrets**: `TG_BOT_TOKEN` (Secret), `TG_CHAT_ID` (Text).
+4. Worker → **Settings → Build → Variables and secrets** (build vaqtidagi): `SITE_URL` = sayt manzili. Keyin qayta deploy.
+5. Sozlamalar `wrangler.jsonc` da, ariza yo'li `worker.js` → `lib/lead.js`.
 
 ## Vercel'ga chiqarish
 
